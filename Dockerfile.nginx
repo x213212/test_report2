@@ -1,0 +1,32 @@
+FROM node:14 as vue_builder
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+# Install Axios
+RUN npm install axios
+RUN npm install response
+RUN npm install element-plus --save
+RUN npm install vue-chartjs chart.js
+COPY ./app /app
+RUN npm run build
+
+
+FROM python:3.9 as flask_backend
+
+WORKDIR /app
+
+COPY ./backend .
+
+FROM nginx:latest
+
+COPY --from=vue_builder /app/dist /usr/share/nginx/html
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

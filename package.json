@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "element-plus": "^1.0.2-beta.28"
+  },
+  "devDependencies": {
+    "vue-cli-plugin-element-plus": "~0.0.13"
+  }
+}
