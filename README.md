@@ -6,3 +6,4 @@ docker compose build
 docker compose up
 docker compose down
 ```
+http://127.0.0.1/
